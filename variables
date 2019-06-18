@@ -1,0 +1,123 @@
+#!/bin/bash
+
+#Definición de una variable, bash es caseSensitive
+#En basch no poner espacios.
+mensaje='Hola bash'
+mensaje_3='Mensaje 2'
+
+
+echo $mensaje $1
+
+echo "HOLA $mensaje"
+
+if [ "debian" = $1 ]; then
+   echo "son iguales"
+elif [ $1 = "dani" ]; then
+   echo "es otro tipo"
+else
+   echo "son diferentes"
+fi
+
+for ((i=1;i<10;i++));
+do
+   echo "aaa"
+done
+
+lista="1 2 3"
+
+for i in $lista;
+do
+  echo $i
+done
+
+for i in $(ls);
+do
+  echo $i
+done
+
+contador=0
+
+while [ $contador -lt 10 ];
+do
+ echo "contado: $contador"
+ let contador=contador+1
+done
+
+
+contador=0
+
+until [ $contador -gt 10 ];
+do
+  echo "se imprimer $contador"
+  let contador=contador+1
+
+done
+
+
+if [ "da" != "te" ]; then
+  echo "entro"
+fi
+
+cadena1="abbbb"
+cadena2="azzz"
+
+if [[ $cadena1 < $cadena2 ]]; then
+ echo "verdadero"
+else
+ echo "falso"
+fi
+#-n si no esta vacia
+#-z si esta vacia
+if [ -n $cadena1 ]; then
+  echo "no esta vacia"
+fi
+
+if [ -z $cadena1 ]; then
+ echo "esta cavia"
+fi
+
+#para numeros siempre let
+let numero1=5
+let numero2=55
+
+if [[ $numero1 -gt $numero2 ]]; then
+  echo "num es mayor"
+else
+  echo "num es menor"
+fi
+
+
+if [ $numero1 -ne $numero2 ]; then
+	echo "not equal"
+else
+	echo "equal"
+fi
+
+
+directorio="/home/dmorenoar/Escritorio/bash"
+
+if [ -d $directorio ]; then
+	echo "es un directorio"
+fi
+
+if [ -e $directorio ]; then
+	echo "el directorio existe"
+fi
+
+if [[ -d $directorio && -x $directorio ]]; then
+	echo "es un directorio i existe"
+fi
+
+#-nt newerthan  -ot olderthan
+
+for elemento in $(ls);
+do
+	if [[ -d $elemento ]]; then
+		echo "es un directorio"
+	else
+		echo "es un fichero"
+	fi
+
+done
+
+

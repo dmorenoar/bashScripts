@@ -1,0 +1,8 @@
+total 12
+drwxrwxr-x 2 dmorenoar dmorenoar 4096 jun 17 11:46 .
+drwxr-xr-x 3 dmorenoar dmorenoar 4096 jun 17 11:39 ..
+-rw-rw-r-- 1 dmorenoar dmorenoar    0 jun 17 11:46 lista.txt
+-rwxrwxrwx 1 dmorenoar dmorenoar  170 jun 17 11:44 variables
+total 8
+-rw-rw-r-- 1 dmorenoar dmorenoar 238 jun 17 11:46 lista.txt
+-rwxrwxrwx 1 dmorenoar dmorenoar 170 jun 17 11:44 variables

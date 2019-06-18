@@ -1,0 +1,32 @@
+#!/bin/bash
+
+#Definició de variables
+hora=`date +%H`
+nomUser=`whoami`
+machineUser=`hostname`
+dateTime=`date +"%Y;%m%d;%M"`
+path="./mnt/extern/"
+file="workers.txt"
+
+#Comprovem si es root qui inicia sessió
+if [[ ! $nomUser = "root" ]]; then
+	#Comprovem que l'hora estigui en les franges
+	if [[ $hora -gt 8 && $hora -lt 20  ]]; then
+		#Comprovem si existeix el fitxer si no el creem
+		if [[ ! -f $path$file  ]]; then
+			mkdir -p $path
+			touch $path$file
+		fi
+
+		if [[ $(cat $path$file | wc -l) -lt 5 ]]; then
+			echo $nomUser $machineUser $dateTime >> ./mnt/extern/workers.txt
+		else
+			echo "Fitxer mes de 1000 línies, comprimint..."
+			tar -cvzf $dateTime.tar.gz $path$file
+			sleep 1
+			rm -R $path$file
+			touch $path$file
+		fi
+	fi
+fi
+echo $nomUser $machineUser $dateTime

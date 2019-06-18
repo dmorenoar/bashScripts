@@ -1,0 +1,2 @@
+-rw-rw-r-- 1 dmorenoar dmorenoar    0 jun 17 11:46 lista.txt
+-rw-rw-r-- 1 dmorenoar dmorenoar 238 jun 17 11:46 lista.txt
