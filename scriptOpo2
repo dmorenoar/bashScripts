@@ -1,0 +1,61 @@
+#!/bin/bash
+
+op=0
+
+function menu {
+        echo "Escull una opció"
+        echo "1) Llistat de tots els usuaris del sistema, ordenats"
+        echo "2) Crear un usuari"
+	echo "3) Eliminar usuari"
+        echo "4) Sortir"
+        read op
+}
+
+while [[ op -ne 4 ]]; 
+do
+	menu
+	case $op in
+		1)
+			cat /etc/passwd | cut -f1 -d : | sort | tee sortida.txt
+		;;
+		2)
+			if [[ $EUID -eq 0 ]]; then
+				echo "Introdueix el nom de l'usuari"
+				read user
+				cat /etc/passwd | grep -qw $user
+				if [[ $? -eq 0 ]]; then
+					echo "Se ha encontrado el usuario"
+				else
+					echo "No existe el usuario, se procede a crear.."
+					useradd -m $user
+					passwd $user
+					
+				fi
+
+			else
+				echo "No ets usuari root"
+			fi
+		;;
+		3)
+			if [[ $EUID -eq 0 ]]; then
+				echo "Introdueix el usuari a eliminar"
+				read user
+				cat /etc/passwd | grep -qw $user
+				if [[ $? -eq 0  ]]; then
+					userdel $user
+					echo "Usuari esborrat"
+				else
+					echo "Usuari no existe"	
+				fi
+			fi
+		;;
+		4)
+			echo "Bye"
+			exit 0
+		;;
+		*)
+			echo "Opció incorrecta"
+		;;
+	esac
+done
+
